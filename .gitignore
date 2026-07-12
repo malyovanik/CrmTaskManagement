@@ -1,0 +1,21 @@
+## .NET
+bin/
+obj/
+*.user
+
+## Visual Studio
+.vs/
+
+## Rider
+.idea/
+
+## appsettings with real secrets
+appsettings.Development.json
+appsettings.*.local.json
+
+## NuGet
+*.nupkg
+*.snupkg
+
+## Claude Code local settings
+.claude/settings.local.json
