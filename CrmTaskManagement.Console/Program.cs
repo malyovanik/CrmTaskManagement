@@ -10,7 +10,7 @@ IConfiguration configuration = new ConfigurationBuilder()
 var connectionString = configuration.GetConnectionString("DefaultConnection");
 
 var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-optionsBuilder.UseNpgsql(connectionString);
+optionsBuilder.UseNpgsql(connectionString).UseSnakeCaseNamingConvention();
 
 using var db = new AppDbContext(optionsBuilder.Options);
 

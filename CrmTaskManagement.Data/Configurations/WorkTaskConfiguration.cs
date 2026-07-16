@@ -8,7 +8,13 @@ public class WorkTaskConfiguration : IEntityTypeConfiguration<WorkTask>
 {
     public void Configure(EntityTypeBuilder<WorkTask> builder)
     {
-        builder.ToTable("work_tasks");
+        builder.ToTable("work_tasks", t =>
+        {
+            t.HasCheckConstraint("CK_work_tasks_due_at_after_planned_start", "\"due_at\" >= \"planned_start_at\"");
+            t.HasCheckConstraint(
+                "CK_work_tasks_completed_at_requires_completed_status",
+                "(\"status\" = 'Completed' AND \"completed_at\" IS NOT NULL) OR (\"status\" <> 'Completed' AND \"completed_at\" IS NULL)");
+        });
 
         builder.HasKey(t => t.Id);
 
@@ -41,5 +47,9 @@ public class WorkTaskConfiguration : IEntityTypeConfiguration<WorkTask>
             .WithMany(e => e.AssignedTasks)
             .HasForeignKey(t => t.AssignedToEmployeeId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasIndex(t => t.AssignedToEmployeeId);
+        builder.HasIndex(t => t.Status);
+        builder.HasIndex(t => t.DueAt);
     }
 }
