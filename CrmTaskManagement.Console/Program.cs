@@ -1,5 +1,8 @@
+using CrmTaskManagement.Console.Demo;
 using CrmTaskManagement.Data;
+using CrmTaskManagement.Data.Repositories;
 using CrmTaskManagement.Data.Seed;
+using CrmTaskManagement.Data.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -24,3 +27,9 @@ Console.WriteLine(seeded ? "Database seeded successfully." : "Database already s
 var employeeCount = await db.Employees.CountAsync();
 var workTaskCount = await db.WorkTasks.CountAsync();
 Console.WriteLine($"Employees: {employeeCount}, WorkTasks: {workTaskCount}");
+
+var workTaskRepository = new WorkTaskRepository(db);
+var employeeRepository = new EmployeeRepository(db);
+var workTaskService = new WorkTaskService(workTaskRepository, employeeRepository);
+var demoRunner = new WorkTaskDemoRunner(workTaskService, workTaskRepository, employeeRepository);
+await demoRunner.RunAsync();
