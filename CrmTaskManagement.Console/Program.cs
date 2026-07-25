@@ -28,6 +28,8 @@ var employeeCount = await db.Employees.CountAsync();
 var workTaskCount = await db.WorkTasks.CountAsync();
 Console.WriteLine($"Employees: {employeeCount}, WorkTasks: {workTaskCount}");
 
-var workTaskService = new WorkTaskService(new WorkTaskRepository(db), new EmployeeRepository(db));
-var demoRunner = new WorkTaskDemoRunner(workTaskService, new EmployeeRepository(db));
+var workTaskRepository = new WorkTaskRepository(db);
+var employeeRepository = new EmployeeRepository(db);
+var workTaskService = new WorkTaskService(workTaskRepository, employeeRepository);
+var demoRunner = new WorkTaskDemoRunner(workTaskService, workTaskRepository, employeeRepository);
 await demoRunner.RunAsync();

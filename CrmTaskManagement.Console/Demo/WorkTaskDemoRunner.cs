@@ -2,6 +2,7 @@ using CrmTaskManagement.Data.Entities;
 using CrmTaskManagement.Data.Repositories;
 using CrmTaskManagement.Data.Services;
 using CrmTaskManagement.Data.Services.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace CrmTaskManagement.Console.Demo;
 
@@ -13,11 +14,13 @@ public class WorkTaskDemoRunner
     private const int CarolId = 3;
 
     private readonly WorkTaskService _workTaskService;
+    private readonly IWorkTaskRepository _workTaskRepository;
     private readonly IEmployeeRepository _employeeRepository;
 
-    public WorkTaskDemoRunner(WorkTaskService workTaskService, IEmployeeRepository employeeRepository)
+    public WorkTaskDemoRunner(WorkTaskService workTaskService, IWorkTaskRepository workTaskRepository, IEmployeeRepository employeeRepository)
     {
         _workTaskService = workTaskService;
+        _workTaskRepository = workTaskRepository;
         _employeeRepository = employeeRepository;
     }
 
@@ -40,6 +43,7 @@ public class WorkTaskDemoRunner
             await DemoChangeStatusAsync(demoTask);
             await DemoChangeStatusViolationAsync(demoTask);
             await DemoGetTasksByAssigneeAsync(alice);
+            await DemoParentTaskSelfReferenceViolationAsync(demoTask);
         }
         catch (Exception ex)
         {
@@ -113,6 +117,27 @@ public class WorkTaskDemoRunner
         foreach (var task in tasks)
         {
             System.Console.WriteLine($"  Id={task.Id}, Title={task.Title}, Status={task.Status}");
+        }
+    }
+
+    private async Task DemoParentTaskSelfReferenceViolationAsync(WorkTask task)
+    {
+        // Bypasses WorkTaskService on purpose - this is a DB-level check constraint
+        // (CK_work_tasks_parent_task_not_self), not a service-layer business rule.
+        task.ParentTaskId = task.Id;
+
+        try
+        {
+            await _workTaskRepository.UpdateAsync(task);
+            System.Console.WriteLine("[ParentTaskId self-reference] Unexpectedly succeeded - constraint did not fire.");
+        }
+        catch (DbUpdateException ex)
+        {
+            System.Console.WriteLine($"[ParentTaskId self-reference - expected failure] {ex.InnerException?.Message ?? ex.Message}");
+        }
+        finally
+        {
+            task.ParentTaskId = null;
         }
     }
 }

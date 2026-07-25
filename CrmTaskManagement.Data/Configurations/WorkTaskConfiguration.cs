@@ -14,6 +14,7 @@ public class WorkTaskConfiguration : IEntityTypeConfiguration<WorkTask>
             t.HasCheckConstraint(
                 "CK_work_tasks_completed_at_requires_completed_status",
                 "(\"status\" = 'Completed' AND \"completed_at\" IS NOT NULL) OR (\"status\" <> 'Completed' AND \"completed_at\" IS NULL)");
+            t.HasCheckConstraint("CK_work_tasks_parent_task_not_self", "\"parent_task_id\" <> \"id\" OR \"parent_task_id\" IS NULL");
         });
 
         builder.HasKey(t => t.Id);
@@ -46,6 +47,11 @@ public class WorkTaskConfiguration : IEntityTypeConfiguration<WorkTask>
         builder.HasOne(t => t.AssignedTo)
             .WithMany(e => e.AssignedTasks)
             .HasForeignKey(t => t.AssignedToEmployeeId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(t => t.ParentTask)
+            .WithMany(t => t.SubTasks)
+            .HasForeignKey(t => t.ParentTaskId)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasIndex(t => t.AssignedToEmployeeId);

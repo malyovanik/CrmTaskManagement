@@ -14,7 +14,10 @@ public class WorkTask
     public int AssignedToEmployeeId { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
+    public int? ParentTaskId { get; set; }
 
     public Employee CreatedBy { get; set; } = null!;
     public Employee AssignedTo { get; set; } = null!;
+    public WorkTask? ParentTask { get; set; }
+    public ICollection<WorkTask> SubTasks { get; set; } = new List<WorkTask>();
 }
