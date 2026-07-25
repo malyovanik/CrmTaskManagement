@@ -1,4 +1,5 @@
 using CrmTaskManagement.Data;
+using CrmTaskManagement.Data.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -16,3 +17,10 @@ using var db = new AppDbContext(optionsBuilder.Options);
 
 var canConnect = db.Database.CanConnect();
 Console.WriteLine($"Can connect to database: {canConnect}");
+
+var seeded = await DbInitializer.SeedAsync(db);
+Console.WriteLine(seeded ? "Database seeded successfully." : "Database already seeded, skipped.");
+
+var employeeCount = await db.Employees.CountAsync();
+var workTaskCount = await db.WorkTasks.CountAsync();
+Console.WriteLine($"Employees: {employeeCount}, WorkTasks: {workTaskCount}");
