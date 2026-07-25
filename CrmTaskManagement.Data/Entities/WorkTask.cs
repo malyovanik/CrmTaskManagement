@@ -5,7 +5,7 @@ public class WorkTask
     public int Id { get; set; }
     public string Title { get; set; } = null!;
     public string? Description { get; set; }
-    public TaskStatus Status { get; set; }
+    public WorkTaskStatus Status { get; set; }
     public DateTime PlannedStartAt { get; set; }
     public DateTime DueAt { get; set; }
     public DateTime? CompletedAt { get; set; }

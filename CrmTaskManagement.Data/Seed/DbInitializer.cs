@@ -48,7 +48,7 @@ public static class DbInitializer
         {
             Title = "Follow up with prospective client",
             Description = "Reach out to the lead from the trade show and schedule a demo.",
-            Status = Entities.TaskStatus.New,
+            Status = WorkTaskStatus.New,
             PlannedStartAt = now.AddDays(1),
             DueAt = now.AddDays(5),
             CompletedAt = null,
@@ -62,7 +62,7 @@ public static class DbInitializer
         {
             Title = "Resolve customer support ticket #482",
             Description = "Investigate reported login issue and provide a fix.",
-            Status = Entities.TaskStatus.InProgress,
+            Status = WorkTaskStatus.InProgress,
             PlannedStartAt = now.AddDays(-3),
             DueAt = now.AddDays(2),
             CompletedAt = null,
@@ -76,7 +76,7 @@ public static class DbInitializer
         {
             Title = "Prepare quarterly sales report",
             Description = "Compile Q2 sales figures for management review.",
-            Status = Entities.TaskStatus.Completed,
+            Status = WorkTaskStatus.Completed,
             PlannedStartAt = now.AddDays(-10),
             DueAt = now.AddDays(-5),
             CompletedAt = now.AddDays(-6),
