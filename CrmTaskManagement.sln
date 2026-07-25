@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrmTaskManagement.Data", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrmTaskManagement.Console", "CrmTaskManagement.Console\CrmTaskManagement.Console.csproj", "{5CE8D52D-4A89-45A9-8FB5-6D1D7C903CA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrmTaskManagement.Data.Tests", "CrmTaskManagement.Data.Tests\CrmTaskManagement.Data.Tests.csproj", "{AB5A6405-4CE8-4F80-B40A-C8F55B82DD56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{5CE8D52D-4A89-45A9-8FB5-6D1D7C903CA4}.Release|x64.Build.0 = Release|Any CPU
 		{5CE8D52D-4A89-45A9-8FB5-6D1D7C903CA4}.Release|x86.ActiveCfg = Release|Any CPU
 		{5CE8D52D-4A89-45A9-8FB5-6D1D7C903CA4}.Release|x86.Build.0 = Release|Any CPU
+		{AB5A6405-4CE8-4F80-B40A-C8F55B82DD56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB5A6405-4CE8-4F80-B40A-C8F55B82DD56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB5A6405-4CE8-4F80-B40A-C8F55B82DD56}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AB5A6405-4CE8-4F80-B40A-C8F55B82DD56}.Debug|x64.Build.0 = Debug|Any CPU
+		{AB5A6405-4CE8-4F80-B40A-C8F55B82DD56}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AB5A6405-4CE8-4F80-B40A-C8F55B82DD56}.Debug|x86.Build.0 = Debug|Any CPU
+		{AB5A6405-4CE8-4F80-B40A-C8F55B82DD56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB5A6405-4CE8-4F80-B40A-C8F55B82DD56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB5A6405-4CE8-4F80-B40A-C8F55B82DD56}.Release|x64.ActiveCfg = Release|Any CPU
+		{AB5A6405-4CE8-4F80-B40A-C8F55B82DD56}.Release|x64.Build.0 = Release|Any CPU
+		{AB5A6405-4CE8-4F80-B40A-C8F55B82DD56}.Release|x86.ActiveCfg = Release|Any CPU
+		{AB5A6405-4CE8-4F80-B40A-C8F55B82DD56}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
