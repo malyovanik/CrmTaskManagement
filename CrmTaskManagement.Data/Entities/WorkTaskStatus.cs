@@ -1,6 +1,6 @@
 namespace CrmTaskManagement.Data.Entities;
 
-public enum TaskStatus
+public enum WorkTaskStatus
 {
     New,
     InProgress,
